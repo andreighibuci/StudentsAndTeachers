@@ -1,0 +1,10 @@
+﻿@model StudentsAndTeachers.ViewModels.CourseListViewModel
+
+<h2>Courses</h2>
+
+<div>
+    @foreach(ClassCourse classCourse in Model.ClassCourses)
+    {
+        <a asp-action="Class" asp-controller="Classes">@classCourse.name</a>
+    }
+</div>

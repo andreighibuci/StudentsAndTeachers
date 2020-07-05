@@ -1,0 +1,20 @@
+﻿@model ClassCourse 
+
+<h1>NewClass</h1>
+<div>
+    <form asp-action="NewClass" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label asp-for="name" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn-group col-md-offset-2 col-md-8">
+                <input class="btn btn-success" type="submit" value="Complete order" />
+                @*<input class="btn btn-default" type="submit" value="Return " />*@
+            </div>
+        </div>
+    </form>
+</div>
