@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,11 @@ namespace StudentsAndTeachers
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IClassesRepository, ClassesRepository>();
-
+            services.AddTransient<IHomeworkRepository, HomeworkRepository>();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +58,15 @@ namespace StudentsAndTeachers
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "classesclass",
+                    template: "Classes/Class/{courseId?}",
+                    defaults: new { Controller = "Classes", action = "Class" });
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

@@ -7,6 +7,7 @@ namespace StudentsAndTeachers.Models
     {
         public int id { get; set; }
         public string name { get; set; }
+        public string description { get; set; }
         public int grade { get; set; }
         public DateTime deadline{ get; set; }
         public List<Comment> Comments { get; set; }

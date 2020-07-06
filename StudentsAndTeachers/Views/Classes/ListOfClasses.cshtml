@@ -5,7 +5,7 @@
 <div>
     @foreach(ClassCourse classCourse in Model.ClassCourses)
     {
-        <a asp-action="Class" asp-controller="Classes">@classCourse.name</a>
+        <a asp-action="Class" asp-controller="Classes"  asp-route-courseId="@classCourse.id">@classCourse.name</a>
     }
 </div>
 <div>

@@ -35,13 +35,34 @@ namespace StudentsAndTeachers.Controllers
 
         public IActionResult NewClass(ClassCourse classCourse)
         {
-            _classesRepository.AddClass(classCourse);
+            
             return View(classCourse);
         }
 
-        public IActionResult Class()
+        public IActionResult NewClassCreator(ClassCourse classCourse)
         {
-            return View();
+            _classesRepository.AddClass(classCourse);
+            IList<ClassCourse> classCourses = new List<ClassCourse>();
+            foreach (ClassCourse classCourse1 in _appDbContext.Classes)
+            {
+                classCourses.Add(classCourse1);
+            }
+
+            var classCoursesVM = new CourseListViewModel()
+            {
+                ClassCourses = classCourses
+            };
+            return View("~/Views/Classes/ListOfClasses.cshtml",classCoursesVM);
+        }
+
+        public ViewResult Class(int courseId)
+        {
+            var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
+            if(course == null)
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
+            return View(course);
         }
     }
 }

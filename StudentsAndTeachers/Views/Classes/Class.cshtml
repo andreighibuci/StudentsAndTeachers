@@ -1,3 +1,9 @@
 ﻿@model ClassCourse
 <h2>@Model.name</h2>
 
+<div>
+    <a asp-action="Homework" asp-controller="Homeworks">Create Homework</a>
+</div>
+    <div>
+        <a asp-action="StatusHomeworks" asp-controller="Homeworks">View Homeworks</a>
+    </div>

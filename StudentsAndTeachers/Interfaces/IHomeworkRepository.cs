@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace StudentsAndTeachers.Interfaces
 {
-    public interface IClassesRepository
+    public interface IHomeworkRepository
     {
-        public void AddClass(ClassCourse classCourse);
-        IEnumerable<ClassCourse> Classes { get; }
+        void AddHomework(Homework homework);
     }
 }

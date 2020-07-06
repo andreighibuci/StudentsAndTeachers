@@ -18,7 +18,6 @@ G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\StudentsAndTeachers.TagHelpers.output.cache
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\StudentsAndTeachers.RazorCoreGenerate.cache
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Classes\Class.cshtml.g.cs
-G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Classes\Homework.cshtml.g.cs
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Classes\ListOfClasses.cshtml.g.cs
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
@@ -145,3 +144,5 @@ G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\StudentsAndTeachers.csproj.CoreCompileInputs.cache
 G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\StudentsAndTeachers.MvcApplicationPartsAssemblyInfo.cache
+G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Homeworks\Homework.cshtml.g.cs
+G:\Facultate\SE\StudentsAndTeachers\StudentsAndTeachers\StudentsAndTeachers\obj\Debug\netcoreapp3.1\Razor\Views\Homeworks\StatusHomeworks.cshtml.g.cs
