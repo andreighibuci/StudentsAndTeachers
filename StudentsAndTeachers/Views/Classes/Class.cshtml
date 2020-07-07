@@ -2,8 +2,8 @@
 <h2>@Model.name</h2>
 
 <div>
-    <a asp-action="Homework" asp-controller="Homeworks">Create Homework</a>
+    <a asp-action="CreateHomeworkView" asp-controller="Classes" asp-route-courseId="@Model.id">Create Homework</a>
 </div>
     <div>
-        <a asp-action="StatusHomeworks" asp-controller="Homeworks">View Homeworks</a>
+        <a asp-action="StatusHomeworks" asp-controller="Classes" asp-route-courseId="@Model.id">View Homeworks</a>
     </div>

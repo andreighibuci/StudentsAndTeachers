@@ -34,7 +34,7 @@ using StudentsAndTeachers.ViewModels;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bebe6aa8934ee28082c3fac5a48743bac0d5d022", @"/Views/Classes/ListOfClasses.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f5aaae9021f5843ef0db24e1ff0ad9fa04ab405e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"36abca04578856d8f67299eb75cef60ec5977e3b", @"/Views/_ViewImports.cshtml")]
     public class Views_Classes_ListOfClasses : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<StudentsAndTeachers.ViewModels.CourseListViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Class", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

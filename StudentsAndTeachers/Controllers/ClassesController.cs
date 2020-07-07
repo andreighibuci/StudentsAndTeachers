@@ -13,10 +13,12 @@ namespace StudentsAndTeachers.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IClassesRepository _classesRepository;
-        public ClassesController(AppDbContext appDbContext, IClassesRepository classesRepository)
+        private readonly IHomeworkRepository _homeworkRepository;
+        public ClassesController(AppDbContext appDbContext, IClassesRepository classesRepository, IHomeworkRepository homeworkRepository)
         {
             _appDbContext = appDbContext;
             _classesRepository = classesRepository;
+            _homeworkRepository = homeworkRepository;
         }
         public IActionResult ListOfClasses()
         {
@@ -64,5 +66,50 @@ namespace StudentsAndTeachers.Controllers
             }
             return View(course);
         }
+        public IActionResult CreateHomeworkView(int courseId, HomeworkViewModel homework)
+        {
+            var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
+            homework.course = course;
+            return View(homework);
+        }
+        public IActionResult CreateHomework(int courseId, Homework homework)
+        {
+            var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
+            if (course == null)
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
+            
+            var HomeworkModel = new HomeworkViewModel()
+            {
+                homework = homework,
+                course = course
+
+            };
+            HomeworkModel.homework.classCourse = course;
+            _homeworkRepository.AddHomework(HomeworkModel.homework);
+
+            return View("~/Views/Classes/Class.cshtml",HomeworkModel.course);
+        }
+        public IActionResult StatusHomeworks(int courseId)
+        {
+            var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
+            IList<Homework> homeworks = new List<Homework>();
+            foreach(Homework homework in _appDbContext.Homeworks)
+            {
+                if (course == homework.classCourse)
+                {
+                    homeworks.Add(homework);
+                }
+            }
+            var HomeworkStatusViewModel = new HomeworkStatusViewModel()
+            {
+                homeworks = homeworks
+            };
+
+            return View(HomeworkStatusViewModel);
+        }
     }
+
+   
 }

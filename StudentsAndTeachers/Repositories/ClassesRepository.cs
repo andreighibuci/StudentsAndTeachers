@@ -20,6 +20,8 @@ namespace StudentsAndTeachers.Repositories
             _appDbContext.SaveChanges();
         }
 
+
+    
         public IEnumerable<ClassCourse> Classes => _appDbContext.Classes;
     }
     

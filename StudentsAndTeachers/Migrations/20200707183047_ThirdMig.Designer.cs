@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentsAndTeachers;
 
 namespace StudentsAndTeachers.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707183047_ThirdMig")]
+    partial class ThirdMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace StudentsAndTeachers.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("classCourseid")
+                    b.Property<int>("classCourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("deadline")
@@ -83,7 +85,7 @@ namespace StudentsAndTeachers.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("classCourseid");
+                    b.HasIndex("classCourseId");
 
                     b.ToTable("Homeworks");
                 });
@@ -124,9 +126,11 @@ namespace StudentsAndTeachers.Migrations
 
             modelBuilder.Entity("StudentsAndTeachers.Models.Homework", b =>
                 {
-                    b.HasOne("StudentsAndTeachers.Models.ClassCourse", "classCourse")
+                    b.HasOne("StudentsAndTeachers.Models.ClassCourse", null)
                         .WithMany("Homeworks")
-                        .HasForeignKey("classCourseid");
+                        .HasForeignKey("classCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentsAndTeachers.Models.StreamMessage", b =>

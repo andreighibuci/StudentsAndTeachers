@@ -6,6 +6,7 @@ namespace StudentsAndTeachers.Models
     public class Homework
     {
         public int id { get; set; }
+        public ClassCourse classCourse { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int grade { get; set; }

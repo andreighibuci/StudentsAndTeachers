@@ -65,6 +65,10 @@ namespace StudentsAndTeachers
                     template: "Classes/Class/{courseId?}",
                     defaults: new { Controller = "Classes", action = "Class" });
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "classescreatehomework",
+                    template: "Classes/CreateHomework/{courseId?}",
+                    defaults: new { Controller = "Classes", action = "CreateHomework" });
             });
 
         }

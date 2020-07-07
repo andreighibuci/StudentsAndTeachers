@@ -1,0 +1,36 @@
+﻿@model HomeworkViewModel
+<h2>Homeworks</h2>
+<div>
+    <form asp-action="CreateHomework" method="post" asp-route-courseId ="@Model.course.id" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label asp-for="@Model.homework.name" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="@Model.homework.name" class="form-control" />
+                <span asp-validation-for="@Model.homework.name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.homework.deadline" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="@Model.homework.deadline" class="form-control" />
+                <span asp-validation-for="@Model.homework.deadline" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.homework.description" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="@Model.homework.description" class="form-control" />
+                <span asp-validation-for="@Model.homework.description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group col-md-offset-2 col-md-8">
+                <input class="btn btn-success" type="submit" value="Create Homework" />
+                @*<input class="btn btn-default" type="submit" value="Return " />*@
+            </div>
+        </div>
+    </form>
+</div>

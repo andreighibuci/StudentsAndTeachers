@@ -24,15 +24,23 @@ namespace StudentsAndTeachers.Controllers
             return View(homework);
         }
 
-        public IActionResult CreateHomework(Homework homework)
-        {
-            _homeworkRepository.AddHomework(homework);
-            return View("~/Views/Home/Index.cshtml");            
-        }
+       // public IActionResult CreateHomework(Homework homework)
+       // {
+        //    _homeworkRepository.AddHomework(homework);
+        //    return View("~/Views/Home/Index.cshtml");            
+       // }
 
-        public IActionResult StatusHomeworks()
+       /* public IActionResult StatusHomeworks(int classCourseId)
         {
+            IList<Homework> homeworks = new List<Homework>();
+            for(Homework homework in _appDbContext.Homeworks)
+            {
+                if(classCourseId == homework.cla)
+            }
             return View();
         }
+        */
+
+       
     }
 }

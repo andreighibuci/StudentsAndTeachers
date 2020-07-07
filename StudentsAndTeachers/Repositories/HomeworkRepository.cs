@@ -19,5 +19,6 @@ namespace StudentsAndTeachers.Repositories
             _appDbContext.Add(homework);
             _appDbContext.SaveChanges();
         }
+
     }
 }
