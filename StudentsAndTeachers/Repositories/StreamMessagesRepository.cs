@@ -7,23 +7,19 @@ using System.Threading.Tasks;
 
 namespace StudentsAndTeachers.Repositories
 {
-    public class ClassesRepository : IClassesRepository
+    public class StreamMessagesRepository : IStreamMessageRepository
     {
         private readonly AppDbContext _appDbContext;
-        public ClassesRepository(AppDbContext appDbContext)
+        public StreamMessagesRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public void AddClass(ClassCourse classCourse)
-        { 
-            _appDbContext.Classes.Add(classCourse);
+
+        public void AddMessage(StreamMessage streamMessage)
+        {
+            _appDbContext.Add(streamMessage);
             _appDbContext.SaveChanges();
         }
 
-        public IEnumerable<ClassCourse> Classes => _appDbContext.Classes;
     }
-    
-       
 }
-    
-

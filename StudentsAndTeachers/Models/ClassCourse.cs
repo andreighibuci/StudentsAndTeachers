@@ -7,7 +7,7 @@ namespace StudentsAndTeachers.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        public List<Homework> Homeworks { get; set; }
-        public List<StreamMessage> Messages { get; set;} 
+        public IList<Homework> Homeworks { get; set; }
+        public IList<StreamMessage> Messages { get; set;} 
     }
 }

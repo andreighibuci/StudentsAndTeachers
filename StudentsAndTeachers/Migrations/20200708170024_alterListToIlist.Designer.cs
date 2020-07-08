@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentsAndTeachers;
 
 namespace StudentsAndTeachers.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200708170024_alterListToIlist")]
+    partial class alterListToIlist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,7 +97,7 @@ namespace StudentsAndTeachers.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("classCourseid")
+                    b.Property<int?>("ClassCourseid")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("dateTime")
@@ -106,7 +108,7 @@ namespace StudentsAndTeachers.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("classCourseid");
+                    b.HasIndex("ClassCourseid");
 
                     b.ToTable("StreamMessages");
                 });
@@ -131,9 +133,9 @@ namespace StudentsAndTeachers.Migrations
 
             modelBuilder.Entity("StudentsAndTeachers.Models.StreamMessage", b =>
                 {
-                    b.HasOne("StudentsAndTeachers.Models.ClassCourse", "classCourse")
+                    b.HasOne("StudentsAndTeachers.Models.ClassCourse", null)
                         .WithMany("Messages")
-                        .HasForeignKey("classCourseid");
+                        .HasForeignKey("ClassCourseid");
                 });
 #pragma warning restore 612, 618
         }

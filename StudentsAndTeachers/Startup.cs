@@ -32,6 +32,7 @@ namespace StudentsAndTeachers
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IClassesRepository, ClassesRepository>();
             services.AddTransient<IHomeworkRepository, HomeworkRepository>();
+            services.AddTransient<IStreamMessageRepository, StreamMessagesRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddMemoryCache();
             services.AddSession();

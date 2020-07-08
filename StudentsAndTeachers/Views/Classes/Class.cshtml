@@ -1,9 +1,34 @@
-﻿@model ClassCourse
-<h2>@Model.name</h2>
-
+﻿@model ClassStreamMessagesStreamMessageViewModel
+<h2>@Model.course.name</h2>
+<a>Register for this class</a>
 <div>
-    <a asp-action="CreateHomeworkView" asp-controller="Classes" asp-route-courseId="@Model.id">Create Homework</a>
+    <a asp-action="CreateHomeworkView" asp-controller="Classes" asp-route-courseId="@Model.course.id">Create Homework</a>
 </div>
     <div>
-        <a asp-action="StatusHomeworks" asp-controller="Classes" asp-route-courseId="@Model.id">View Homeworks</a>
+        <a asp-action="StatusHomeworks" asp-controller="Classes" asp-route-courseId="@Model.course.id">View Homeworks</a>
     </div>
+
+@foreach(StreamMessage streamMessage in @Model.streamMessages)
+{
+    @if(streamMessage.classCourse == @Model.course)
+    {
+        <div>
+            <div>@streamMessage.dateTime</div>
+            <div> @streamMessage.message</div>
+        </div>
+    }
+}
+
+    <form asp-action="CreateMessage" asp-route-courseId ="@Model.course.id" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <div class="col-md-5">
+                <input asp-for="@Model.streamMessage.message" class="form-control" />
+                <span asp-validation-for="@Model.streamMessage.message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn-group col-md-offset-2 col-md-8">
+                <input class="btn btn-success" type="submit" value="Post Message" />
+                @*<input class="btn btn-default" type="submit" value="Return " />*@
+            </div>
+    </form>

@@ -14,11 +14,13 @@ namespace StudentsAndTeachers.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly IClassesRepository _classesRepository;
         private readonly IHomeworkRepository _homeworkRepository;
-        public ClassesController(AppDbContext appDbContext, IClassesRepository classesRepository, IHomeworkRepository homeworkRepository)
+        private readonly IStreamMessageRepository _streamMessageRepository;
+        public ClassesController(AppDbContext appDbContext, IClassesRepository classesRepository, IHomeworkRepository homeworkRepository, IStreamMessageRepository streamMessageRepository)
         {
             _appDbContext = appDbContext;
             _classesRepository = classesRepository;
             _homeworkRepository = homeworkRepository;
+            _streamMessageRepository = streamMessageRepository;
         }
         public IActionResult ListOfClasses()
         {
@@ -57,14 +59,28 @@ namespace StudentsAndTeachers.Controllers
             return View("~/Views/Classes/ListOfClasses.cshtml",classCoursesVM);
         }
 
-        public ViewResult Class(int courseId)
+        public ViewResult Class(int courseId,StreamMessage streamMessage1)
         {
+            IList<StreamMessage> streamMessages = new List<StreamMessage>();
             var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
             if(course == null)
             {
                 return View("~/Views/Home/Index.cshtml");
             }
-            return View(course);
+
+            foreach (StreamMessage streamMessage in _appDbContext.StreamMessages)
+            {
+                streamMessages.Add(streamMessage);
+            }
+
+            var ClassStreamMessagesStreamMessageVM = new ClassStreamMessagesStreamMessageViewModel
+            {
+                course = course,
+                streamMessage = streamMessage1,
+                streamMessages = streamMessages
+            };
+
+            return View(ClassStreamMessagesStreamMessageVM);
         }
         public IActionResult CreateHomeworkView(int courseId, HomeworkViewModel homework)
         {
@@ -100,14 +116,49 @@ namespace StudentsAndTeachers.Controllers
                 if (course == homework.classCourse)
                 {
                     homeworks.Add(homework);
+                    
+                   
                 }
             }
+
             var HomeworkStatusViewModel = new HomeworkStatusViewModel()
             {
                 homeworks = homeworks
             };
 
             return View(HomeworkStatusViewModel);
+        }
+
+        public IActionResult CreateMessage(int courseId, StreamMessage streamMessage)
+        {
+            IList<StreamMessage> streamMessages = new List<StreamMessage>();
+            var course = _classesRepository.Classes.FirstOrDefault(d => d.id == courseId);
+            if (course == null)
+            {
+                return View("~/Views/Home/Index.cshtml");
+            }
+
+            var StreamMessageModel = new StreamMessageViewModel
+            {
+                streamMessage = streamMessage,
+                course = course
+            };
+            StreamMessageModel.streamMessage.classCourse = course;
+            StreamMessageModel.streamMessage.dateTime = DateTime.Now;
+            _streamMessageRepository.AddMessage(StreamMessageModel.streamMessage);
+
+            foreach (StreamMessage streamMessage1 in _appDbContext.StreamMessages)
+            {
+                streamMessages.Add(streamMessage1);
+            }
+
+            var ClassStreamMessagesStreamMessageVM = new ClassStreamMessagesStreamMessageViewModel
+            {
+                course = course,
+                streamMessage = streamMessage,
+                streamMessages = streamMessages
+            };
+            return View("~/Views/Classes/Class.cshtml", ClassStreamMessagesStreamMessageVM);
         }
     }
 
