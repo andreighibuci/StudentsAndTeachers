@@ -1,0 +1,43 @@
+﻿@model Classroom.ViewModels.ClassStreamViewModel
+<h2>@Model.Class.Title</h2>
+
+
+@if (User.IsInRole("Teacher"))
+{
+    <div>
+        <h4>Register Code : @Model.Class.SecurityCode</h4>
+    </div>
+
+    <div>
+        <a class="btn btn-outline-dark btn-hover" asp-action="CreateAssignment" asp-controller="Class" asp-route-courseId="@Model.Class.Id">Create Homework</a>
+    </div>
+}
+<div>
+    <a class="btn btn-outline-dark btn-hover" asp-action="StatusAssignment" asp-controller="Class" asp-route-courseId="@Model.Class.Id">View Homeworks</a>
+</div>
+
+@foreach (Stream streamMessage in @Model.streams)
+{
+    @if (streamMessage.Class == @Model.Class)
+    {
+        <div>
+            <div>@streamMessage.dateTime</div>
+            <div> @streamMessage.message</div>
+        </div>
+    }
+}
+
+<form asp-action="CreateMessage" asp-route-courseId="@Model.Class.Id" method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+        <div class="col-md-5">
+            <input asp-for="@Model.stream.message" class="form-control" />
+            <span asp-validation-for="@Model.stream.message" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="btn-group col-md-offset-2 col-md-8">
+            <input class="btn btn-outline-dark btn-hover" type="submit" value="Post Message" />
+            @*<input class="btn btn-default" type="submit" value="Return " />*@
+        </div>
+    </div>
+</form>

@@ -1,6 +1,6 @@
 using System;
 
-namespace StudentsAndTeachers.Models
+namespace Classroom.Models
 {
     public class ErrorViewModel
     {

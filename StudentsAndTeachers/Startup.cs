@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Classroom.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StudentsAndTeachers.Interfaces;
-using StudentsAndTeachers.Repositories;
+using Classroom.ViewModels;
+using Classroom.Repositories;
+using Classroom.Interfaces;
 
-namespace StudentsAndTeachers
+namespace Classroom
 {
     public class Startup
     {
@@ -27,16 +30,21 @@ namespace StudentsAndTeachers
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IClassesRepository, ClassesRepository>();
-            services.AddTransient<IHomeworkRepository, HomeworkRepository>();
-            services.AddTransient<IStreamMessageRepository, StreamMessagesRepository>();
-            services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddMemoryCache();
-            services.AddSession();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection1")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddTransient<IAssignmentRepository, AssignmentRepository>();
+            services.AddTransient<IClassRepository, ClassRepository>();
+            services.AddTransient<IStreamRepository, StreamRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAssignmentSubmitRepository, AssignmentSubmitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +53,7 @@ namespace StudentsAndTeachers
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -57,21 +66,16 @@ namespace StudentsAndTeachers
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "classesclass",
-                    template: "Classes/Class/{courseId?}",
-                    defaults: new { Controller = "Classes", action = "Class" });
-                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "classescreatehomework",
-                    template: "Classes/CreateHomework/{courseId?}",
-                    defaults: new { Controller = "Classes", action = "CreateHomework" });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
-
         }
     }
 }

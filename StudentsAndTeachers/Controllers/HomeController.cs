@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using StudentsAndTeachers.Models;
+using Classroom.Models;
 
-namespace StudentsAndTeachers.Controllers
+namespace Classroom.Controllers
 {
     public class HomeController : Controller
     {
